@@ -1,39 +1,7 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Login from './components/Login'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-8">
-      <div className="max-w-2xl w-full bg-white rounded-lg shadow-xl p-8 text-center">
-        <div className="flex justify-center gap-8 mb-8">
-          <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
-            <img src={viteLogo} className="h-16 w-16 hover:scale-110 transition-transform" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
-            <img src={reactLogo} className="h-16 w-16 hover:scale-110 transition-transform animate-spin" style={{ animationDuration: '20s' }} alt="React logo" />
-          </a>
-        </div>
-        <h1 className="text-4xl font-bold text-gray-800 mb-6">Vite + React</h1>
-        <div className="bg-gray-50 rounded-lg p-6 mb-6">
-          <button 
-            onClick={() => setCount((count) => count + 1)}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg"
-          >
-            count is {count}
-          </button>
-          <p className="mt-4 text-gray-600">
-            Edit <code className="bg-gray-200 px-2 py-1 rounded text-sm">src/App.jsx</code> and save to test HMR
-          </p>
-        </div>
-        <p className="text-gray-500 text-sm">
-          Click on the Vite and React logos to learn more
-        </p>
-      </div>
-    </div>
-  )
+  return <Login />
 }
 
 export default App
