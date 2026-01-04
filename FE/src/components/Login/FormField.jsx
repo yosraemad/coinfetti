@@ -1,4 +1,5 @@
 import ErrorMessage from './ErrorMessage'
+import { getInputClasses } from '../../utils/classNames'
 
 /**
  * Reusable form field component
@@ -15,11 +16,7 @@ const FormField = ({
   placeholder,
   children,
 }) => {
-  const inputClasses = `w-full px-4 py-3 bg-pink-50 border-4 outline-none transition-all text-rose-700 font-mono placeholder:text-pink-300/40 ${
-    error && touched
-      ? 'border-red-400 focus:border-red-500 focus:shadow-[0_0_15px_rgba(239,68,68,0.4)]'
-      : 'border-pink-300 focus:border-rose-400 focus:shadow-[0_0_15px_rgba(236,72,153,0.3)]'
-  }`
+  const inputClasses = getInputClasses(error && touched)
 
   return (
     <div>

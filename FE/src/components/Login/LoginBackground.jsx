@@ -2,6 +2,14 @@
  * Background decorations component for Login page
  */
 const LoginBackground = () => {
+  const gridStyle = {
+    backgroundImage: `
+      linear-gradient(rgba(236, 72, 153, 0.2) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(236, 72, 153, 0.2) 1px, transparent 1px)
+    `,
+    backgroundSize: '40px 40px',
+  }
+
   const sparkles = [
     { emoji: '✨', position: 'top-20 left-20', size: 'text-2xl' },
     { emoji: '⭐', position: 'top-40 right-32', size: 'text-xl', delay: 'delay-300' },
@@ -11,21 +19,10 @@ const LoginBackground = () => {
 
   return (
     <>
-      {/* Animated background grid */}
       <div className="absolute inset-0 opacity-30">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(236, 72, 153, 0.2) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(236, 72, 153, 0.2) 1px, transparent 1px)
-            `,
-            backgroundSize: '40px 40px',
-          }}
-        />
+        <div className="absolute inset-0" style={gridStyle} />
       </div>
 
-      {/* Floating sparkles */}
       <div className="absolute inset-0 pointer-events-none">
         {sparkles.map((sparkle, index) => (
           <div
