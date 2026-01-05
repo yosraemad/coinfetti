@@ -2,10 +2,10 @@ import { useForm } from '../../hooks/useForm'
 import { validateEmail, validatePassword } from '../../utils/validation'
 import { FORM_PLACEHOLDERS, FORM_LABELS, FORM_MESSAGES } from '../../constants/form'
 import { buttonStyles } from '../../constants/styles'
-import AuthLayout from '../../components/auth/shared/AuthLayout'
-import AuthPanel from '../../components/auth/shared/AuthPanel'
-import FormField from '../../components/auth/shared/FormField'
-import PasswordInput from '../../components/auth/shared/PasswordInput'
+import AuthLayout from '../../components/Auth/shared/AuthLayout'
+import AuthPanel from '../../components/Auth/shared/AuthPanel'
+import FormField from '../../components/Auth/shared/FormField'
+import PasswordInput from '../../components/Auth/shared/PasswordInput'
 
 const Login = () => {
   const { values, errors, touched, handleChange, handleBlur, validateAll } = useForm(
