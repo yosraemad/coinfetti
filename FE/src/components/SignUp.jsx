@@ -1,5 +1,5 @@
 import { useForm } from '../hooks/useForm'
-import { validateEmail, validatePassword } from '../utils/validation'
+import { validateEmail, validatePassword, validateConfirmPassword } from '../utils/validation'
 import { FORM_PLACEHOLDERS, FORM_LABELS, FORM_MESSAGES } from '../constants/form'
 import { buttonStyles } from '../constants/styles'
 import AuthLayout from './Auth/AuthLayout'
@@ -7,28 +7,32 @@ import AuthPanel from './Auth/AuthPanel'
 import FormField from './Login/FormField'
 import PasswordInput from './Login/PasswordInput'
 
-const Login = () => {
+const SignUp = () => {
   const { values, errors, touched, handleChange, handleBlur, validateAll } = useForm(
-    { email: '', password: '' },
-    { email: validateEmail, password: validatePassword }
+    { email: '', password: '', confirmPassword: '' },
+    { 
+      email: validateEmail, 
+      password: validatePassword,
+      confirmPassword: validateConfirmPassword
+    }
   )
 
   const handleSubmit = (e) => {
     e.preventDefault()
     
     if (validateAll()) {
-      // TODO: Implement login logic
-      console.log('Login attempt:', values)
+      // TODO: Implement sign up logic
+      console.log('Sign up attempt:', values)
     }
   }
 
   return (
     <AuthLayout
-      footerMessage={FORM_MESSAGES.NO_ACCOUNT}
-      footerLinkText={FORM_LABELS.SIGN_UP}
-      footerLinkTo="/signup"
+      footerMessage={FORM_MESSAGES.HAS_ACCOUNT}
+      footerLinkText={FORM_LABELS.SIGN_IN}
+      footerLinkTo="/login"
     >
-      <AuthPanel title="✨ Sign In ✨">
+      <AuthPanel title="✨ Sign Up ✨">
         <form onSubmit={handleSubmit} noValidate className="space-y-6">
           <FormField
             id="email"
@@ -59,8 +63,25 @@ const Login = () => {
             />
           </FormField>
 
+          <FormField
+            id="confirmPassword"
+            label={FORM_LABELS.CONFIRM_PASSWORD}
+            error={errors.confirmPassword}
+            touched={touched.confirmPassword}
+          >
+            <PasswordInput
+              id="confirmPassword"
+              value={values.confirmPassword}
+              onChange={handleChange('confirmPassword')}
+              onBlur={handleBlur('confirmPassword')}
+              error={errors.confirmPassword}
+              touched={touched.confirmPassword}
+              placeholder={FORM_PLACEHOLDERS.CONFIRM_PASSWORD}
+            />
+          </FormField>
+
           <button type="submit" className={buttonStyles.submit}>
-            <span className="relative z-10">{FORM_LABELS.SIGN_IN}</span>
+            <span className="relative z-10">{FORM_LABELS.SIGN_UP}</span>
             <div className={buttonStyles.submitHover} />
           </button>
         </form>
@@ -69,4 +90,5 @@ const Login = () => {
   )
 }
 
-export default Login
+export default SignUp
+

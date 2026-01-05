@@ -25,6 +25,16 @@ export const validatePassword = (password) => {
   return ''
 }
 
+export const validateConfirmPassword = (confirmPassword, allValues = {}) => {
+  if (!confirmPassword) {
+    return 'Please confirm your password! 🔒'
+  }
+  if (confirmPassword !== allValues.password) {
+    return 'Passwords do not match! ✨'
+  }
+  return ''
+}
+
 export const validationRules = {
   email: validateEmail,
   password: validatePassword,

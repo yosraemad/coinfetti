@@ -13,20 +13,36 @@ export const useForm = (initialValues = {}, validators = {}) => {
 
   const handleChange = (field) => (e) => {
     const value = e.target.value
-    setValues((prev) => ({ ...prev, [field]: value }))
-
-    // Validate on change if field has been touched
-    if (touched[field] && validators[field]) {
-      const error = validators[field](value)
-      setErrors((prev) => ({ ...prev, [field]: error }))
-    }
+    setValues((prev) => {
+      const newValues = { ...prev, [field]: value }
+      
+      // Validate on change if field has been touched
+      if (touched[field] && validators[field]) {
+        const error = validators[field](newValues[field], newValues)
+        setErrors((prevErrors) => {
+          const newErrors = { ...prevErrors, [field]: error }
+          
+          // Re-validate dependent fields (e.g., confirmPassword when password changes)
+          if (field === 'password' && touched.confirmPassword && validators.confirmPassword) {
+            newErrors.confirmPassword = validators.confirmPassword(
+              newValues.confirmPassword,
+              newValues
+            )
+          }
+          
+          return newErrors
+        })
+      }
+      
+      return newValues
+    })
   }
 
   const handleBlur = (field) => () => {
     setTouched((prev) => ({ ...prev, [field]: true }))
     
     if (validators[field]) {
-      const error = validators[field](values[field])
+      const error = validators[field](values[field], values)
       setErrors((prev) => ({ ...prev, [field]: error }))
     }
   }
@@ -38,7 +54,7 @@ export const useForm = (initialValues = {}, validators = {}) => {
     Object.keys(validators).forEach((field) => {
       newTouched[field] = true
       if (validators[field]) {
-        const error = validators[field](values[field])
+        const error = validators[field](values[field], values)
         if (error) {
           newErrors[field] = error
         }
