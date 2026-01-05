@@ -16,23 +16,24 @@ export const useForm = (initialValues = {}, validators = {}) => {
     setValues((prev) => {
       const newValues = { ...prev, [field]: value }
       
-      // Validate on change if field has been touched
-      if (touched[field] && validators[field]) {
-        const error = validators[field](newValues[field], newValues)
-        setErrors((prevErrors) => {
-          const newErrors = { ...prevErrors, [field]: error }
-          
-          // Re-validate dependent fields (e.g., confirmPassword when password changes)
-          if (field === 'password' && touched.confirmPassword && validators.confirmPassword) {
-            newErrors.confirmPassword = validators.confirmPassword(
-              newValues.confirmPassword,
-              newValues
-            )
-          }
-          
-          return newErrors
-        })
-      }
+      setErrors((prevErrors) => {
+        const newErrors = { ...prevErrors }
+        
+        // Validate on change if field has been touched
+        if (touched[field] && validators[field]) {
+          newErrors[field] = validators[field](newValues[field], newValues)
+        }
+        
+        // Re-validate dependent fields (e.g., confirmPassword when password changes)
+        if (field === 'password' && touched.confirmPassword && validators.confirmPassword) {
+          newErrors.confirmPassword = validators.confirmPassword(
+            newValues.confirmPassword,
+            newValues
+          )
+        }
+        
+        return newErrors
+      })
       
       return newValues
     })
