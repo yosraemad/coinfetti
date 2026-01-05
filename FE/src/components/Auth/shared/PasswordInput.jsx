@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import EyeIcon from '../icons/EyeIcon'
-import EyeOffIcon from '../icons/EyeOffIcon'
-import { getInputClasses } from '../../utils/classNames'
+import EyeIcon from '../../ui/icons/EyeIcon'
+import EyeOffIcon from '../../ui/icons/EyeOffIcon'
+import { getInputClasses } from '../../../utils/classNames'
 
 /**
  * Password input component with visibility toggle

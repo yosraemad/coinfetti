@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
-import { titleStyles, layoutStyles, linkStyles } from '../../constants/styles'
-import { FORM_MESSAGES } from '../../constants/form'
-import LoginBackground from '../Login/LoginBackground'
+import { titleStyles, layoutStyles, linkStyles } from '../../../constants/styles'
+import AuthBackground from './AuthBackground'
 
 /**
  * Shared layout component for authentication pages (Login/SignUp)
@@ -14,7 +13,7 @@ const AuthLayout = ({
 }) => {
   return (
     <div className={layoutStyles.page}>
-      <LoginBackground />
+      <AuthBackground />
 
       <div className={layoutStyles.content}>
         {/* Title */}

@@ -1,5 +1,5 @@
-import { panelStyles } from '../../constants/styles'
-import CornerDecorations from '../Login/CornerDecorations'
+import { panelStyles } from '../../../constants/styles'
+import CornerDecorations from './CornerDecorations'
 
 /**
  * Shared panel component for authentication forms

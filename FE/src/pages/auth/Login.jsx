@@ -1,11 +1,11 @@
-import { useForm } from '../hooks/useForm'
-import { validateEmail, validatePassword } from '../utils/validation'
-import { FORM_PLACEHOLDERS, FORM_LABELS, FORM_MESSAGES } from '../constants/form'
-import { buttonStyles } from '../constants/styles'
-import AuthLayout from './Auth/AuthLayout'
-import AuthPanel from './Auth/AuthPanel'
-import FormField from './Login/FormField'
-import PasswordInput from './Login/PasswordInput'
+import { useForm } from '../../hooks/useForm'
+import { validateEmail, validatePassword } from '../../utils/validation'
+import { FORM_PLACEHOLDERS, FORM_LABELS, FORM_MESSAGES } from '../../constants/form'
+import { buttonStyles } from '../../constants/styles'
+import AuthLayout from '../../components/auth/shared/AuthLayout'
+import AuthPanel from '../../components/auth/shared/AuthPanel'
+import FormField from '../../components/auth/shared/FormField'
+import PasswordInput from '../../components/auth/shared/PasswordInput'
 
 const Login = () => {
   const { values, errors, touched, handleChange, handleBlur, validateAll } = useForm(
@@ -70,3 +70,4 @@ const Login = () => {
 }
 
 export default Login
+

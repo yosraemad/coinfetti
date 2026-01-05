@@ -1,5 +1,5 @@
 import ErrorMessage from './ErrorMessage'
-import { getInputClasses } from '../../utils/classNames'
+import { getInputClasses } from '../../../utils/classNames'
 
 /**
  * Reusable form field component
