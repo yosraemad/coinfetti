@@ -1,7 +1,7 @@
 /**
- * Background decorations component for Login page
+ * Background decorations component for authentication pages
  */
-const LoginBackground = () => {
+const AuthBackground = () => {
   const gridStyle = {
     backgroundImage: `
       linear-gradient(rgba(236, 72, 153, 0.2) 1px, transparent 1px),
@@ -37,5 +37,5 @@ const LoginBackground = () => {
   )
 }
 
-export default LoginBackground
+export default AuthBackground
 
