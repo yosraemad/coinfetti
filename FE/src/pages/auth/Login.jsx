@@ -1,4 +1,7 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm'
+import { useAuth } from '../../contexts/AuthContext'
 import { validateEmail, validatePassword } from '../../utils/validation'
 import { FORM_PLACEHOLDERS, FORM_LABELS, FORM_MESSAGES } from '../../constants/form'
 import { buttonStyles } from '../../constants/styles'
@@ -6,19 +9,39 @@ import AuthLayout from '../../components/Auth/shared/AuthLayout'
 import AuthPanel from '../../components/Auth/shared/AuthPanel'
 import FormField from '../../components/Auth/shared/FormField'
 import PasswordInput from '../../components/Auth/shared/PasswordInput'
+import ErrorMessage from '../../components/Auth/shared/ErrorMessage'
 
 const Login = () => {
+  const navigate = useNavigate()
+  const { signIn } = useAuth()
+  const [submitError, setSubmitError] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  
   const { values, errors, touched, handleChange, handleBlur, validateAll } = useForm(
     { email: '', password: '' },
     { email: validateEmail, password: validatePassword }
   )
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setSubmitError(null)
     
     if (validateAll()) {
-      // TODO: Implement login logic
-      console.log('Login attempt:', values)
+      setIsLoading(true)
+      try {
+        const { data, error } = await signIn(values.email, values.password)
+        
+        if (error) {
+          setSubmitError(error.message)
+        } else if (data?.user) {
+          // Redirect to dashboard or home page after successful login
+          navigate('/dashboard', { replace: true })
+        }
+      } catch (err) {
+        setSubmitError('An unexpected error occurred. Please try again.')
+      } finally {
+        setIsLoading(false)
+      }
     }
   }
 
@@ -59,8 +82,16 @@ const Login = () => {
             />
           </FormField>
 
-          <button type="submit" className={buttonStyles.submit}>
-            <span className="relative z-10">{FORM_LABELS.SIGN_IN}</span>
+          {submitError && <ErrorMessage message={submitError} />}
+          
+          <button 
+            type="submit" 
+            className={buttonStyles.submit}
+            disabled={isLoading}
+          >
+            <span className="relative z-10">
+              {isLoading ? 'Signing in...' : FORM_LABELS.SIGN_IN}
+            </span>
             <div className={buttonStyles.submitHover} />
           </button>
         </form>
