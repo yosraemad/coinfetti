@@ -1,0 +1,11 @@
+{
+  "name": "@coinfetti/shared-categories",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./categories.js",
+  "module": "./categories.js",
+  "exports": {
+    ".": "./categories.js"
+  }
+}
+

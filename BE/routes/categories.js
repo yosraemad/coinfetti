@@ -6,6 +6,10 @@ import {
 
 const router = express.Router();
 
+// Simple UUID v4 validator (case-insensitive)
+const UUID_V4_REGEX =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
 // GET /api/categories
 // Returns system categories + categories for the given user
 router.get('/', async (req, res) => {
@@ -16,6 +20,10 @@ router.get('/', async (req, res) => {
 
     if (!userId) {
       return res.status(400).json({ error: 'userId query parameter is required' });
+    }
+
+    if (!UUID_V4_REGEX.test(userId)) {
+      return res.status(400).json({ error: 'Invalid userId format' });
     }
 
     const categories = await getCategoriesForUser(userId);
@@ -35,6 +43,10 @@ router.post('/', async (req, res) => {
 
     if (!userId) {
       return res.status(400).json({ error: 'userId query parameter is required' });
+    }
+
+    if (!UUID_V4_REGEX.test(userId)) {
+      return res.status(400).json({ error: 'Invalid userId format' });
     }
 
     const categoryData = req.body;
